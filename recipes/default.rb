@@ -45,8 +45,8 @@ if node[:scout][:account_key]
 
   template "/etc/scout/scoutd.yml" do
     source "scoutd.yml.erb"
-    owner "scoutd"
-    group "scoutd"
+    owner node[:scout][:owner]
+    group node[:scout][:group]
     variables :options => {
       :account_key => node[:scout][:account_key],
       :hostname => node[:scout][:hostname],
@@ -67,8 +67,8 @@ else
 end
 
 directory "/var/lib/scoutd/.scout" do
-  owner "scoutd"
-  group "scoutd"
+  owner node[:scout][:owner]
+  group node[:scout][:group]
   recursive true
 end
 
@@ -76,8 +76,8 @@ if node[:scout][:public_key]
   template "/var/lib/scoutd/.scout/scout_rsa.pub" do
     source "scout_rsa.pub.erb"
     mode 0440
-    owner "scoutd"
-    group "scoutd"
+    owner node[:scout][:owner]
+    group node[:scout][:group]
     action :create
   end
 end
@@ -110,8 +110,8 @@ end
 template "/var/lib/scoutd/.scout/plugins.properties" do
   source "plugins.properties.erb"
   mode 0664
-  owner "scoutd"
-  group "scoutd"
+  owner node[:scout][:owner]
+  group node[:scout][:group]
   variables lazy {
     plugin_properties = {}
     node['scout']['plugin_properties'].each do |property, lookup_hash|

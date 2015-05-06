@@ -4,7 +4,7 @@
 
 Chef::Log.info "Loading: #{cookbook_name}::#{recipe_name}"
 
-if node[:scout] and !node[:scout][:account_key]
+if node[:scout] and node[:scout][:account_key]
   case node[:platform]
   when 'ubuntu'
     apt_repository "scout" do

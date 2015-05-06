@@ -4,8 +4,8 @@
 
 # required
 default[:scout][:account_key] = nil
-default[:scout][:owner] = 'scoutd'
-default[:scout][:group] = 'scoutd'
+default[:scout][:owner] ||= 'scoutd'
+default[:scout][:group] ||= 'scoutd'
 
 # optional
 default[:scout][:hostname] = nil
